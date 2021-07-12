@@ -18,10 +18,8 @@ class _HomePageState extends State<HomePage> {
   void getNews() async {
     await http.get(Uri.parse(MyStrings.news_url)).then((value) {
       var parsedData = jsonDecode(value.body);
-      list = (parsedData["articles"] as List)
-          .map((e) => Articles.fromJson(e))
-          .toList();
-      print(list);
+      list = (parsedData["articles"] as List).map((e) => Articles.fromJson(e)).toList();
+      print(list[0]);
       setState(() {});
     });
   }
@@ -39,10 +37,31 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text('News App'),
         ),
-        body: Container(
-          child: ListView.builder(itemBuilder: (context, index) {
-            return Container(
-              height: 100,
+        body: list.isEmpty?Center(child: CircularProgressIndicator(),):Container(
+          child: ListView.builder(itemCount: list.length,itemBuilder: (context, index) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("${index+1}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+                  ],
+                ),
+                Text("ID = ${list[index].source!.id}"),
+                Text("Name = ${list[index].source!.name}"),
+                Text("Author = ${list[index].author}"),
+                Text("Title = ${list[index].title}"),
+                Text("Description = ${list[index].description}"),
+                list.isEmpty?CircularProgressIndicator():Image.network("${list[index].urlToImage}"),
+                Text("Published At = ${list[index].publishedAt}"),
+                Text("Content = ${list[index].content}"),
+                SizedBox(
+                  height: 40,
+                )
+              ],
             );
           }),
         ));
