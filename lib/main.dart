@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:practice_project/api_intigration/home_page.dart';
-import 'package:practice_project/json/json_posts.dart';
-import 'package:practice_project/new_widget/custom_visiblity.dart';
+
+import 'package:practice_project/image_picker/image_picker.dart';
+
 import 'package:practice_project/new_widget/hero.dart';
+
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: Colors.pink,
-      systemNavigationBarColor: Colors.pink
+      statusBarColor: Colors.yellow,
+      systemNavigationBarColor: Colors.red
     )
   );
   runApp(MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: TestImagePicker(),
       routes: {
         'Second Page' : (context) => SecondPage()
       },

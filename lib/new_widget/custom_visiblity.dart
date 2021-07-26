@@ -59,6 +59,7 @@ class _CustomVisibilityState extends State<CustomVisibility> {
                      ),
                    ),
 
+                   // ignore: deprecated_member_use
                    RaisedButton(onPressed: (){
                      setState(() {
                        _isVisible = !_isVisible;
@@ -84,6 +85,7 @@ class _CustomVisibilityState extends State<CustomVisibility> {
                      ),
                    ),
 
+                   // ignore: deprecated_member_use
                    RaisedButton(onPressed: (){
                      setState(() {
                        _isVisible = !_isVisible;
@@ -109,6 +111,7 @@ class _CustomVisibilityState extends State<CustomVisibility> {
                      ),
                    ),
 
+                   // ignore: deprecated_member_use
                    RaisedButton(onPressed: (){
                      setState(() {
                        _isVisible = !_isVisible;
@@ -134,6 +137,7 @@ class _CustomVisibilityState extends State<CustomVisibility> {
                      ),
                    ),
 
+                   // ignore: deprecated_member_use
                    RaisedButton(onPressed: (){
                      setState(() {
                        _isVisible = !_isVisible;
@@ -159,6 +163,7 @@ class _CustomVisibilityState extends State<CustomVisibility> {
                      ),
                    ),
 
+                   // ignore: deprecated_member_use
                    RaisedButton(onPressed: (){
                      setState(() {
                        _isVisible = !_isVisible;

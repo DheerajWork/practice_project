@@ -9,8 +9,10 @@ class Validation extends StatefulWidget {
 class _ValidationState extends State<Validation> {
 
   final _formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passController = TextEditingController();
+  final confirmPassController = TextEditingController();
 
   @override
   void dispose() {
@@ -74,6 +76,24 @@ class _ValidationState extends State<Validation> {
                 SizedBox(
                   height:20,
                 ),
+                CustomTextField(
+                  hintText: 'Enter Password',
+                  keyboardType: TextInputType.emailAddress,
+                  controller: confirmPassController,
+                  icon: Icon(Icons.lock),
+                  validator:
+                      (password){
+                    if (password.length == 0) {
+                      return 'Enter Confirm password';
+                    } else if (password!=passController.text) {
+                      return 'Enter Correct Password';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height:20,
+                ),
                 // ignore: deprecated_member_use
                 RaisedButton(
                     child: Text('Login'),
@@ -84,6 +104,12 @@ class _ValidationState extends State<Validation> {
                         print('Password = ${passController.text}');
                       }
                     }),
+                SizedBox(
+                  height:20,
+                ),
+                 Text("Email = ${emailController.text}"),
+                 Text('Password = ${passController.text}'),
+
              /*SizedBox(
                   height:20,
                 ),
@@ -98,6 +124,8 @@ class _ValidationState extends State<Validation> {
   }
 }
 
+
+
 // ignore: must_be_immutable
 class CustomTextField extends StatefulWidget {
 
@@ -106,8 +134,9 @@ class CustomTextField extends StatefulWidget {
   var validator;
   var controller;
   var icon;
+  bool ?obscureText;
 
-  CustomTextField({this.icon,this.controller,this.hintText,this.validator,this.keyboardType});
+  CustomTextField({this.obscureText,this.icon,this.controller,this.hintText,this.validator,this.keyboardType});
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -118,6 +147,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: widget.obscureText==null ? false : true,
       validator: widget.validator,
       controller: widget.controller,
       keyboardType: widget.keyboardType,

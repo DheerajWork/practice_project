@@ -35,6 +35,7 @@ dev_dependencies:
   email_validator: ^2.0.1
   dio: ^4.0.0
   http: ^0.13.3
+  image_picker: ^0.8.2
 
 
 # For information on the generic Dart part of this file, see the
