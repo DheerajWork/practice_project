@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:image_cropper/image_cropper.dart';
 
 class TestImagePicker extends StatefulWidget {
   @override
@@ -10,23 +10,47 @@ class TestImagePicker extends StatefulWidget {
 }
 
 class _TestImagePickerState extends State<TestImagePicker> {
-
   final ImagePicker picker = ImagePicker();
-   File? urlImage;
-   String? url;
-  getImage() async{
-    XFile? imagePick = await picker.pickImage(source: ImageSource.gallery
-      ,);
-     urlImage = File(imagePick!.path);
-     url = urlImage!.path;
-    setState(() {
+  File? urlImage;
+  String? url;
+  File? croppedFile;
 
-    });
+  getImage() async {
+    XFile? pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    urlImage = File(pickedFile!.path);
+    url = urlImage!.path;
+    if (url != null) {
+      croppedFile = await ImageCropper.cropImage(
+          sourcePath: pickedFile.path,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+            CropAspectRatioPreset.ratio3x2,
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.ratio4x3,
+            CropAspectRatioPreset.ratio16x9
+          ],
+          androidUiSettings: AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: Colors.deepOrange,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+          iosUiSettings: IOSUiSettings(
+            minimumAspectRatio: 1.0,
+          ));
+      setState(() {});
+      if (croppedFile != null) {
+        setState(() {
+          urlImage = croppedFile!.path as File?;
+        });
+      }
+    }
+    setState(() {});
     print("ImagePick :::::: $url");
     return url;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +62,15 @@ class _TestImagePickerState extends State<TestImagePicker> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-               urlImage==null ? Icon(Icons.add): Image.file(urlImage!),
+                croppedFile == null
+                    ? Icon(Icons.add)
+                    : Image.file(croppedFile!),
                 ElevatedButton(
-                  onPressed: (){
+                  onPressed: () {
                     getImage();
-                  }, child: Text("Click"),
+                    setState(() {});
+                  },
+                  child: Text("Click"),
                 ),
               ],
             ),
