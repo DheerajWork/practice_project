@@ -19,7 +19,7 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     _auth.verifyPhoneNumber(
-        phoneNumber: _phoneController.text,
+      phoneNumber: _phoneController.text,
         timeout: Duration(seconds: 60),
         verificationCompleted: (AuthCredential credential) async {
           
@@ -48,7 +48,6 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
             children: [
               TextField(
                 controller: _codeController,
-
               )
             ],
           ),
@@ -59,7 +58,13 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
                   print("111111111111111111");
               var credential = PhoneAuthProvider.credential(
                   verificationId: verificationId, smsCode: _codeController.text);
-              await _auth.signInWithCredential(credential);
+             UserCredential user= await _auth.signInWithCredential(credential);
+
+             if(user.user!=null){
+               Navigator.push(
+                   context, MaterialPageRoute(builder: (context) => HomeScreen()));
+             }
+
               _verificationId = verificationId;
               print("00000000000000000000000");
             }, child: Text("Confirm"))
