@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginApi extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _LoginApiState extends State<LoginApi> {
 
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
+
 
   Future registrationUser ()async{
     String APIURL = "http://shaybani.quiz99.online/api/login";
@@ -29,6 +31,20 @@ class _LoginApiState extends State<LoginApi> {
     print(response.body);
 
     var data = jsonDecode(response.body);
+
+    if(response.statusCode == 200){
+      Fluttertoast.showToast(
+          msg: "${data['message']}",gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.black,
+          toastLength: Toast.LENGTH_LONG
+      );
+    } else{
+      Fluttertoast.showToast(
+          msg: "Something went wrong",gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.black,
+          toastLength: Toast.LENGTH_LONG
+      );
+    }
 
     print("Data $data");
 
@@ -51,12 +67,14 @@ class _LoginApiState extends State<LoginApi> {
             TextField(
               controller: _password,
             ),
+
             SizedBox(
               height: 40,
             ),
             ElevatedButton(onPressed: (){
               registrationUser();
-            }, child: Text("Submit"))
+
+            }, child: Text("Submit")),
           ],
         ),
       ),
