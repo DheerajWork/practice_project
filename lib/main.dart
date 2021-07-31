@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:practice_project/new_widget/hero.dart';
 import 'package:practice_project/phone_authentication/phone_authentication.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:practice_project/register_api/login_api.dart';
 import 'package:practice_project/register_api/register_api.dart';
 
 void main() async{
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: RegistrationApi(),
+      home: LoginApi(),
       routes: {
         'Second Page' : (context) => SecondPage()
       },
