@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:practice_project/image_picker/image_picker.dart';
-
 import 'package:practice_project/new_widget/hero.dart';
 import 'package:practice_project/phone_authentication/phone_authentication.dart';
-import 'package:practice_project/random_number_add/random_number_add.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:practice_project/register_api/register_api.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: UserNumberLogin(),
+      home: RegistrationApi(),
       routes: {
         'Second Page' : (context) => SecondPage()
       },

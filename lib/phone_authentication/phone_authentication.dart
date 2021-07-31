@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:practice_project/phone_authentication/home_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class UserNumberLogin extends StatefulWidget {
   @override
@@ -13,7 +12,7 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
 
-  String? phoneNo, smssend, _verificationId;
+  String? phoneNo,_verificationId;
 
   Future<void> loginUser(String phone) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -21,25 +20,26 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
     _auth.verifyPhoneNumber(
       phoneNumber: _phoneController.text,
         timeout: Duration(seconds: 60),
-        verificationCompleted: (AuthCredential credential) async {
-          
+
+      verificationCompleted: (PhoneAuthCredential credential) async {
+
           Navigator.of(context).pop();
-          var result = await _auth.signInWithCredential(credential);
+
+          UserCredential result = await _auth.signInWithCredential(credential);
 
           var user = result.user;
 
           if (user != null) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
           }
           else{
             print("Error");
           }
         },
-        verificationFailed: (var exception) {
+        verificationFailed: (FirebaseAuthException exception) {
           print(exception);
         },
-        codeSent: (String verificationId, [int? forceResendingToken]){
+        codeSent: (String verificationId, int? forceResendingToken){
       showDialog(context: context, builder: (context){
         return AlertDialog(
           title: Text("Give the code"),
@@ -56,8 +56,8 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
                 onPressed: ()
                 async{
                   print("111111111111111111");
-              var credential = PhoneAuthProvider.credential(
-                  verificationId: verificationId, smsCode: _codeController.text);
+                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                  verificationId: verificationId,smsCode: _codeController.text);
              UserCredential user= await _auth.signInWithCredential(credential);
 
              if(user.user!=null){
@@ -81,6 +81,32 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
   }
 
 
+  // Future <void> loginUser ()async {
+  //   FirebaseAuth _auth = FirebaseAuth.instance;
+  //
+  //   _auth.verifyPhoneNumber(
+  //       phoneNumber: _phoneController.text,
+  //       verificationCompleted: (var i){},
+  //       verificationFailed: (var i){
+  //         print(i);
+  //       },
+  //       codeSent: (String verificationId, [int? forceResendingToken]){
+  //         showDialog(context: context,
+  //             builder: (context){
+  //           return AlertDialog(
+  //             title: Text("Code"),
+  //
+  //           );
+  //             }
+  //         )
+  //       },
+  //       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout
+  //   )
+  //
+  // }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +127,6 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
                 height: 20,
               ),
               ElevatedButton(onPressed: (){
-
                 loginUser(_phoneController.text);
               }, child: Text("Verify"))
             ],
