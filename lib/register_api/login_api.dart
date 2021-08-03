@@ -37,13 +37,16 @@ class _LoginApiState extends State<LoginApi> {
           msg: "${data['message']}",gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.black,
           toastLength: Toast.LENGTH_LONG
+
       );
+      Navigator.of(context).pushNamed('Home Page');
     } else{
       Fluttertoast.showToast(
           msg: "Something went wrong",gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.black,
           toastLength: Toast.LENGTH_LONG
       );
+      print("${data['message']}");
     }
 
     print("Data $data");
@@ -59,12 +62,18 @@ class _LoginApiState extends State<LoginApi> {
         child: Column(
           children: [
             TextField(
+              decoration: InputDecoration(
+                  hintText: 'email'
+              ),
               controller: _email,
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
+              decoration: InputDecoration(
+                  hintText: 'Password'
+              ),
               controller: _password,
             ),
 

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -37,7 +38,15 @@ class _RegistrationApiState extends State<RegistrationApi> {
 
     print("Data $data");
 
+    if(response.statusCode == 200){
+      Navigator.of(context).pushNamed('Login Api');
+    } else{
+      print("${data['message']}");
+    }
+
   }
+
+
 
   @override
   void initState() {
@@ -57,24 +66,36 @@ class _RegistrationApiState extends State<RegistrationApi> {
           child: Column(
             children: [
               TextField(
+                decoration: InputDecoration(
+                  hintText: 'Name'
+                ),
                 controller: _name,
               ),
               SizedBox(
                 height: 20,
               ),
               TextField(
+                decoration: InputDecoration(
+                    hintText: 'phone'
+                ),
                 controller: _phone,
               ),
               SizedBox(
                 height: 20,
               ),
               TextField(
+                decoration: InputDecoration(
+                    hintText: 'email'
+                ),
                 controller: _email,
               ),
               SizedBox(
                 height: 20,
               ),
               TextField(
+                decoration: InputDecoration(
+                    hintText: 'Password'
+                ),
                 controller: _password,
               ),
               SizedBox(
