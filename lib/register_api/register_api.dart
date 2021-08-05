@@ -3,8 +3,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:practice_project/register_api/login_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationApi extends StatefulWidget {
+  static String route = "RegistrationApi";
+
   @override
   _RegistrationApiState createState() => _RegistrationApiState();
 }
@@ -16,6 +20,7 @@ class _RegistrationApiState extends State<RegistrationApi> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  SharedPreferences? preferences;
 
   Future registrationUser ()async{
     String APIURL = "http://shaybani.quiz99.online/api/register";
@@ -28,6 +33,11 @@ class _RegistrationApiState extends State<RegistrationApi> {
       'photo': "ss",
     };
 
+    preferences!.setString("name", _name.text);
+    preferences!.setString("phone", _phone.text);
+    preferences!.setString("email", _email.text);
+    preferences!.setString("pass", _password.text);
+
     print("JSON DATA $mapAdd");
 
     http.Response response = await http.post(Uri.parse(APIURL),body: mapAdd);
@@ -39,20 +49,23 @@ class _RegistrationApiState extends State<RegistrationApi> {
     print("Data $data");
 
     if(response.statusCode == 200){
-      Navigator.of(context).pushNamed('Login Api');
+      Navigator.of(context).pushReplacementNamed(LoginApi.route);
     } else{
       print("${data['message']}");
     }
 
   }
 
+  getShared() async {
+    preferences = await SharedPreferences.getInstance();
+  }
 
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    getShared();
   }
 
   @override
@@ -103,7 +116,10 @@ class _RegistrationApiState extends State<RegistrationApi> {
               ),
               ElevatedButton(onPressed: (){
                 registrationUser();
-              }, child: Text("Submit"))
+              }, child: Text("Submit")),
+              ElevatedButton(onPressed: (){
+                Navigator.pushNamed(context, LoginApi.route);
+              }, child: Text("Login"))
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:practice_project/phone_authentication/home_screen.dart';
+import 'package:practice_project/register_api/global.dart';
 
 class UserNumberLogin extends StatefulWidget {
   @override
@@ -58,7 +59,9 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
                   print("111111111111111111");
                   PhoneAuthCredential credential = PhoneAuthProvider.credential(
                   verificationId: verificationId,smsCode: _codeController.text);
-             UserCredential user= await _auth.signInWithCredential(credential);
+             UserCredential user = await _auth.signInWithCredential(credential);
+                 Global.uid = user.user!.uid;
+             print(user.user!.uid);
 
              if(user.user!=null){
                Navigator.push(
@@ -74,7 +77,6 @@ class _UserNumberLoginState extends State<UserNumberLogin> {
         },
           codeAutoRetrievalTimeout: (String verificationId) {
             print("verification code: " + verificationId);
-            //showSnackbar("verification code: " + verificationId);
             _verificationId = verificationId;
           },
     );

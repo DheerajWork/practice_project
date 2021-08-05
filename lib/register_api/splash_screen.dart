@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:practice_project/api_intigration/home_page.dart';
-import 'package:practice_project/phone_authentication/home_screen.dart';
-import 'package:practice_project/register_api/global.dart';
+import 'package:practice_project/register_api/haha.dart';
+import 'package:practice_project/register_api/register_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,43 +11,30 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SharedPreferences? preferences;
+  SharedPreferences? pref;
+  static String? userName;
+  static String? emailId;
+  static String? phoneNumber;
 
   getUserDetails() async {
-    preferences = await SharedPreferences.getInstance();
+    pref = await SharedPreferences.getInstance();
 
-    if (preferences!.getString("name") != null &&
-        preferences!.getString("phone") != null &&
-        preferences!.getString("email") != null) {
+    if (pref!.getString('name') != null &&
+        pref!.getString('email') != null &&
+        pref!.getString('phone') != null) {
+      userName = pref!.getString('name');
+      emailId = pref!.getString('email');
+      phoneNumber = pref!.getString('phone');
 
-      Global.userName = preferences!.getString('name');
-      Global.phoneNumber = preferences!.getString('phone');
-      Global.emailId = preferences!.getString('email');
-
-      print("Name ::: ${Global.userName}");
-      print("phone ::: ${Global.phoneNumber}");
-      print("email ::: ${Global.emailId}");
-
-      Global.userData = {
-        "name" : preferences!.getString("name"),
-        "phone_no" : preferences!.getString("phone"),
-        "email" : preferences!.getString("email"),
-      };
-      print("Global User Login Is DONE!!!!");
-      print("Enter Home With Login");
-      Navigator.of(context).pushReplacementNamed('Home Page');
-
-    } else {
+      print(userName);
+      print(emailId);
+      print(phoneNumber);
+      print("Direct Login");
+      Navigator.of(context).pushNamed(Haha.route);
+    } else{
       print("Enter Register Screen");
-      Navigator.of(context).pushReplacementNamed('Register Api');
-
+      Navigator.of(context).pushReplacementNamed(RegistrationApi.route);
     }
-
-
-    // if (preferences != null) {
-    //   Navigator.of(context).pushAndRemoveUntil(
-    //       MaterialPageRoute(builder: (c) => HomePage()), (route) => false);
-    // }
   }
 
 

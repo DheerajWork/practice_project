@@ -1,11 +1,17 @@
-// Copyright (c) 2019, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:practice_project/phone_authentication/phone_authentication.dart';
+import 'package:practice_project/register_api/haha.dart';
+import 'package:practice_project/register_api/login_api.dart';
+import 'package:practice_project/register_api/register_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,7 +22,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    routes: {
+      RegistrationApi.route:(context) =>RegistrationApi(),
+      Haha.route:(context) =>Haha(),
+      LoginApi.route:(context) =>LoginApi(),
+    },
+    home: UserNumberLogin(),
     );
   }
 }
@@ -59,6 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
       pref!.setInt("counter", _counter);
     });
   }
+
+
   @override
   void initState() {
     // TODO: implement initState

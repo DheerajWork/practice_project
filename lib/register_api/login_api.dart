@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practice_project/register_api/haha.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginApi extends StatefulWidget {
+  static String route = "LoginApi";
+
   @override
   _LoginApiState createState() => _LoginApiState();
 }
@@ -13,9 +17,10 @@ class _LoginApiState extends State<LoginApi> {
 
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
+  SharedPreferences? preferences;
 
 
-  Future registrationUser ()async{
+  Future loginUser ()async{
     String APIURL = "http://shaybani.quiz99.online/api/login";
 
     Map mapAdd = {
@@ -23,6 +28,9 @@ class _LoginApiState extends State<LoginApi> {
       'password': _password.text,
       'photo': "ss",
     };
+
+    preferences!.setString("email", _email.text);
+    preferences!.setString("pass", _password.text);
 
     print("JSON DATA $mapAdd");
 
@@ -39,7 +47,7 @@ class _LoginApiState extends State<LoginApi> {
           toastLength: Toast.LENGTH_LONG
 
       );
-      Navigator.of(context).pushNamed('Home Page');
+      Navigator.of(context).pushReplacementNamed(Haha.route);
     } else{
       Fluttertoast.showToast(
           msg: "Something went wrong",gravity: ToastGravity.BOTTOM,
@@ -51,6 +59,17 @@ class _LoginApiState extends State<LoginApi> {
 
     print("Data $data");
 
+  }
+
+  getLogin() async {
+    preferences = await SharedPreferences.getInstance();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getLogin();
   }
 
   @override
@@ -81,7 +100,7 @@ class _LoginApiState extends State<LoginApi> {
               height: 40,
             ),
             ElevatedButton(onPressed: (){
-              registrationUser();
+              loginUser();
 
             }, child: Text("Submit")),
           ],

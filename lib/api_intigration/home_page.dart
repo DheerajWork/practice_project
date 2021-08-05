@@ -7,6 +7,7 @@ import 'package:practice_project/api_intigration/model_class/news_model_class.da
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
+
   @override
   _HomePageState createState() => _HomePageState();
 }
