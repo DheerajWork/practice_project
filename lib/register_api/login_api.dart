@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practice_project/register_api/haha.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,19 +40,19 @@ class _LoginApiState extends State<LoginApi> {
     var data = jsonDecode(response.body);
 
     if(response.statusCode == 200){
-      Fluttertoast.showToast(
-          msg: "${data['message']}",gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.black,
-          toastLength: Toast.LENGTH_LONG
-
-      );
-      Navigator.of(context).pushReplacementNamed(Haha.route);
+      // Fluttertoast.showToast(
+      //     msg: "${data['message']}",gravity: ToastGravity.BOTTOM,
+      //     backgroundColor: Colors.black,
+      //     toastLength: Toast.LENGTH_LONG
+      //
+      // );
+      Navigator.of(context).pushNamed(Haha.route);
     } else{
-      Fluttertoast.showToast(
-          msg: "Something went wrong",gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.black,
-          toastLength: Toast.LENGTH_LONG
-      );
+      // Fluttertoast.showToast(
+      //     msg: "Something went wrong",gravity: ToastGravity.BOTTOM,
+      //     backgroundColor: Colors.black,
+      //     toastLength: Toast.LENGTH_LONG
+      // );
       print("${data['message']}");
     }
 

@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:practice_project/phone_authentication/phone_authentication.dart';
 import 'package:practice_project/register_api/haha.dart';
 import 'package:practice_project/register_api/login_api.dart';
+import 'package:practice_project/register_api/ocx_login.dart';
+import 'package:practice_project/register_api/ocx_login_2.dart';
+import 'package:practice_project/register_api/ocx_registeration.dart';
 import 'package:practice_project/register_api/register_api.dart';
+import 'package:practice_project/register_api/splash_screen.dart';
+import 'package:practice_project/student/student_model_class.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -26,8 +31,10 @@ class MyApp extends StatelessWidget {
       RegistrationApi.route:(context) =>RegistrationApi(),
       Haha.route:(context) =>Haha(),
       LoginApi.route:(context) =>LoginApi(),
+      OcxLogin.route:(context) =>OcxLogin(),
+      OcxRegister.route : (context) => OcxRegister()
     },
-    home: UserNumberLogin(),
+    home: SplashScreen(),
     );
   }
 }

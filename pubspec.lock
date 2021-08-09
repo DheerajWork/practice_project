@@ -37,7 +37,7 @@ packages:
     source: hosted
     version: "1.1.0"
   cloud_firestore:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
@@ -79,14 +79,14 @@ packages:
     source: hosted
     version: "1.0.3"
   dio:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
   email_validator:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: email_validator
       url: "https://pub.dartlang.org"
@@ -114,14 +114,14 @@ packages:
     source: hosted
     version: "6.1.2"
   firebase:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: firebase
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.0.1"
   firebase_auth:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: firebase_auth
       url: "https://pub.dartlang.org"
@@ -142,7 +142,7 @@ packages:
     source: hosted
     version: "3.0.0"
   firebase_core:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -184,15 +184,8 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  fluttertoast:
-    dependency: "direct dev"
-    description:
-      name: fluttertoast
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "8.0.7"
   http:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -206,14 +199,14 @@ packages:
     source: hosted
     version: "4.0.0"
   image_cropper:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: image_cropper
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.1"
   image_picker:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: image_picker
       url: "https://pub.dartlang.org"
