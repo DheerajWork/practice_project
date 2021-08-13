@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:practice_project/random_number_add/random_number_add.dart';
 import 'package:practice_project/register_api/haha.dart';
 import 'package:practice_project/register_api/login_api.dart';
 import 'package:practice_project/register_api/ocx_login.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       OcxLogin.route:(context) =>OcxLogin(),
       OcxRegister.route : (context) => OcxRegister()
     },
-    home: MySharePref(),
+    home: RandomNumberAdd(),
     );
   }
 }

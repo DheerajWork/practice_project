@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:practice_project/share_preference/pref_model_class.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharePref extends StatefulWidget {
@@ -7,14 +10,15 @@ class MySharePref extends StatefulWidget {
 }
 
 class _MySharePrefState extends State<MySharePref> {
-  int num = 0;
   SharedPreferences? pref;
+  int num = 0;
+  // PrefModelClass? prefModelClass = PrefModelClass(a: jsonDecode("a"));
 
   setNum() async {
     pref = await SharedPreferences.getInstance();
 
     if (pref!.getInt('num') != null) {
-      num = pref!.getInt('num')!;
+    num = pref!.getInt('num')!;
 
       print(num);
     } else {
@@ -22,12 +26,8 @@ class _MySharePrefState extends State<MySharePref> {
 
       print(num);
     }
-  }
-
-  addNum() {
     setState(() {
-      num++;
-      pref!.setInt('num', num);
+
     });
   }
 
@@ -35,7 +35,8 @@ class _MySharePrefState extends State<MySharePref> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    setNum();
+     setNum();
+     // print(prefModelClass);
   }
 
   @override
@@ -45,13 +46,32 @@ class _MySharePrefState extends State<MySharePref> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           // Text('$num',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+           Text('$num',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
             ElevatedButton(
                 onPressed: () {
-                  addNum();
-                  setState(() {});
+                  setState(() {
+                    // num++;
+                    pref!.setInt('num',num);
+                  });
                 },
-                child: Text('$num'))
+                child: Text('$num')),
+
+            Transform(
+              transform: Matrix4.rotationZ(0.5-11),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.red,
+              ),
+            ),
+            Transform(
+              transform: Matrix4.rotationZ(0.5-20),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.red,
+              ),
+            ),
           ],
         ),
       ),

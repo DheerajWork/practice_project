@@ -19,9 +19,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
   SharedPreferences? pref;
-  static String? userName;
-  static String? emailId;
-  static String? phoneNumber;
 
   getUserDetails() async {
     pref = await SharedPreferences.getInstance();
@@ -33,23 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       Navigator.of(context).pushNamed(OcxRegister.route);
     }
-
-    // if (pref!.getString('name') != null &&
-    //     pref!.getString('email') != null &&
-    //     pref!.getString('phone') != null) {
-    //   userName = pref!.getString('name');
-    //   emailId = pref!.getString('email');
-    //   phoneNumber = pref!.getString('phone');
-    //
-    //   print(userName);
-    //   print(emailId);
-    //   print(phoneNumber);
-    //   print("Direct Login");
-    //   Navigator.of(context).pushNamed(Haha.route);
-    // } else{
-    //   print("Enter Register Screen");
-    //   Navigator.of(context).pushReplacementNamed(RegistrationApi.route);
-    // }
   }
 
 
