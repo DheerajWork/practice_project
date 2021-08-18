@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
-import 'package:practice_project/random_number_add/random_number_add.dart';
+import 'package:practice_project/packages/svg.dart';
 import 'package:practice_project/register_api/haha.dart';
 import 'package:practice_project/register_api/login_api.dart';
 import 'package:practice_project/register_api/ocx_login.dart';
 import 'package:practice_project/register_api/ocx_registeration.dart';
 import 'package:practice_project/register_api/register_api.dart';
-import 'package:practice_project/share_preference/share_preference.dart';
+import 'package:practice_project/web_api/web_api_testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
       OcxLogin.route:(context) =>OcxLogin(),
       OcxRegister.route : (context) => OcxRegister()
     },
-    home: RandomNumberAdd(),
+    home: Packages(),
     );
   }
 }

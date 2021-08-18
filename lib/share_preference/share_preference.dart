@@ -1,7 +1,5 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:practice_project/share_preference/pref_model_class.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharePref extends StatefulWidget {

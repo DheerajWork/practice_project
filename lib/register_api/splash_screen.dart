@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_project/api_intigration/home_page.dart';
 import 'package:practice_project/register_api/global.dart';
 import 'package:practice_project/register_api/haha.dart';
 import 'package:practice_project/register_api/ocx_login_model_class.dart';
 import 'package:practice_project/register_api/ocx_registeration.dart';
-import 'package:practice_project/register_api/register_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
